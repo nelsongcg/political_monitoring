@@ -1,7 +1,6 @@
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
-import json
 import boto3
 import time
 import configparser
@@ -56,7 +55,7 @@ if __name__ == '__main__':
     while True:
         try:
             print('Twitter streaming...')
-            stream = Stream(auth, listener)
+            stream = Stream(auth, listener,tweet_mode="extended")
             stream.filter(track=['bolsonaro'], stall_warnings=True)
         except Exception as e:
             print(e)
