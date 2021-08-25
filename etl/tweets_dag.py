@@ -76,6 +76,14 @@ create_hashtags_table = PostgresOperator(
     postgres_conn_id="redshift"
 )
 
+create_tweets_table = PostgresOperator(
+    task_id="create_tweets_table",
+    dag=dag,
+    sql=sql.CREATE_TWEETS_TABLE,
+    postgres_conn_id="redshift"
+)
+
+
 insert_into_users_table = PythonOperator(
     task_id='insert_into_users_table',
     dag=dag,
@@ -92,8 +100,17 @@ insert_into_hasgtags_table = PythonOperator(
     provide_context=True
 )
 
+insert_into_tweets_table = PythonOperator(
+    task_id='insert_into_tweets_table',
+    dag=dag,
+    python_callable=insert_into_table,
+    op_kwargs={'sql':sql.INSERT_INTO_TWEETS_TABLE},
+    provide_context=True
+)
+
 
 create_staging_tweets_table >> stage_tweets_to_redshift
-stage_tweets_to_redshift >> [create_users_table,create_hashtags_table]
+stage_tweets_to_redshift >> [create_users_table,create_hashtags_table,create_tweets_table]
 create_users_table >> insert_into_users_table
 create_hashtags_table >> insert_into_hasgtags_table
+create_tweets_table >> insert_into_tweets_table
