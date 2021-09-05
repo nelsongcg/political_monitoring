@@ -12,7 +12,7 @@ At this stage the set up includes a pipeline for collecting
 tweets with a particular query and segregation between tweets,
 users and the hashtags used.
 
-## Use case
+## Purpose of this project
 
 To demonstrate its capabilities, the system is retrieving all tweets and
 retweets that include the word "Bolsonaro" the president of Brazil.
@@ -76,7 +76,7 @@ is ingested daily by 'agenda_dag'.
 
 ![alt text](imgs/agenda_schedule.png?raw=true "Architecture")
 
-## Analysis
+## How the users can use this model
 
 Using the structure of the data analysed it is possible to see the trends 
 over time
@@ -86,5 +86,20 @@ over time
 And the effect of presidential events on social media
 
 ![alt text](imgs/analytics3.png?raw=true "Architecture")
+
+# Stress Scenarios
+
+## 1) if the data was increased by 100X
+The pipeline was built in order to accommodate an increase of flow of data
+by kinesis firehose. It is possible that the number of nodes in redshift to 
+be increased as well.
+
+## 2) If the pipelines were run on a daily basis
+The pipelines already run more often than that. 
+
+## 3) If the database needed to be accessed by 100+ people
+There might be a need to increase the nodes in redshift in order to deal with
+this load of access, but the current infrastructure is already built with
+the capability to provide access to around 100 people.
 
 
