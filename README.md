@@ -14,8 +14,8 @@ users and the hashtags used.
 
 ## Use case
 
-To demonstrate its capabilities retrieving all tweets and
-retweets that include the work "Bolsonaro" the president of Brazil.
+To demonstrate its capabilities, the system is retrieving all tweets and
+retweets that include the word "Bolsonaro" the president of Brazil.
 The choice for this query derives from the fact that the president is
 very active in social media, particularly Twitter, which gives a wealth
 of data to be analysed.
@@ -49,14 +49,14 @@ the raw data into three distinct tables, tweets, users and hashtags.
 
 ### Presidential agenda
 
-There is a manual ingestion of the presidential agenda at
-s3://agenda-president/agenda_president.csv
+For the presidential agenda, there is a manual ingestion that is placed in
+the s3 bucket: s3://agenda-president/agenda_president.csv
 
-The file is then uploaded into a dedicated table in redshift
+The file is then uploaded into a dedicated tables in redshift
 
 ## Data base
 
-
+![alt text](imgs/data_base.png?raw=true "data base")
 
 ## Airflow
 
@@ -78,7 +78,13 @@ is ingested daily by 'agenda_dag'.
 
 ## Analysis
 
-<Include analysis in Tableau>
+Using the structure of the data analysed it is possible to see the trends 
+over time
 
+![alt text](imgs/analytics2.png?raw=true "Architecture")
+
+And the effect of presidential events on social media
+
+![alt text](imgs/analytics3.png?raw=true "Architecture")
 
 
